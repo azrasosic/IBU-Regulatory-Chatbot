@@ -1,0 +1,12 @@
+streamlit
+groq
+langdetect
+pymongo
+certifi
+sentence-transformers
+python-dotenv
+pymupdf
+pdfplumber
+torch
+transformers
+numpy
