@@ -14,13 +14,21 @@ from langdetect import detect
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
 
+def _secret(key: str) -> str:
+    """Read from Streamlit secrets in production, .env locally."""
+    try:
+        import streamlit as st
+        return st.secrets[key]
+    except Exception:
+        return os.environ.get(key, "")
+
 # ── Configuration ──────────────────────────────────────────────────────────────
-MONGO_URI  = os.environ.get("MONGO_URI")
+MONGO_URI  = _secret("MONGO_URI")
 DB_NAME    = "ibu_legal_database"
 MODEL_NAME = "llama-3.3-70b-versatile"
 
 # ── Clients (initialised once when the module is imported) ─────────────────────
-groq_client     = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+groq_client     = Groq(api_key=_secret("GROQ_API_KEY"))
 embedding_model = SentenceTransformer("BAAI/bge-m3")
 
 

@@ -133,6 +133,24 @@ The chatbot will open in your browser at `http://localhost:8501`.
 
 ---
 
+## Deploying to Streamlit Community Cloud
+
+> **Note:** Complete Steps 1–5 locally first so your MongoDB Atlas cluster is
+> already populated before deploying.
+
+1. Push the repository to GitHub (make sure `.env` is not committed)
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub
+3. Click **New app** → select your repo → set the main file path to `app.py`
+4. Before clicking Deploy, open **Advanced settings → Secrets** and paste:
+
+```toml
+GROQ_API_KEY = "your_key_here"
+MONGO_URI    = "your_connection_string_here"
+```
+
+5. Click **Deploy** — the first startup takes a few minutes while the BGE-M3
+   model (~2.3 GB) downloads. Subsequent cold starts are faster.
+
 ## Adding New Documents
 
 To add a new regulatory document to the knowledge base:
